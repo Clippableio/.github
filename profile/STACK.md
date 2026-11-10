@@ -4,7 +4,7 @@
 | --- | --- |
 | [WebFrontend](https://github.com/Clippableio/WebFrontend) | clippable.io and the customer app |
 | [WebBackend](https://github.com/Clippableio/WebBackend) | Public-app API, authentication, billing and Clippy |
-| [Enterprise](https://github.com/Clippableio/Enterprise) | Fanatics, Anduril and Sony applications, with independent deployments and data |
+| [Enterprise](https://github.com/Clippableio/Enterprise) | Fanatics and Anduril applications, with independent deployments and data |
 | [Autoclipper](https://github.com/Clippableio/Autoclipper) | Clip/edit engine, API/worker services and Ascend full-video moment finder |
 | [ClippableTraining](https://github.com/Clippableio/ClippableTraining) | Human review and quality feedback |
 | [Clippableios](https://github.com/Clippableio/Clippableios) | iOS app |

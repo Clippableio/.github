@@ -10,7 +10,7 @@ Your own social media agency
 | --- | --- |
 | [WebFrontend](https://github.com/Clippableio/WebFrontend) | clippable.io |
 | [WebBackend](https://github.com/Clippableio/WebBackend) | Public-app API only |
-| [Enterprise](https://github.com/Clippableio/Enterprise) | Fanatics, Anduril and Sony client applications |
+| [Enterprise](https://github.com/Clippableio/Enterprise) | Fanatics and Anduril client applications |
 | [Autoclipper](https://github.com/Clippableio/Autoclipper) | Shared clip/edit engine and Ascend moment finder |
 | [ClippableTraining](https://github.com/Clippableio/ClippableTraining) | Human review and quality feedback |
 | [Clippableios](https://github.com/Clippableio/Clippableios) | iOS |
