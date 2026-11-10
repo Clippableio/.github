@@ -10,10 +10,13 @@ Your own social media agency
 | --- | --- |
 | [WebFrontend](https://github.com/Clippableio/WebFrontend) | clippable.io |
 | [WebBackend](https://github.com/Clippableio/WebBackend) | Public-app API only |
-| [Fanatics](https://github.com/Clippableio/Fanatics) | Fanatics clips product |
-| [Sony](https://github.com/Clippableio/Sony) | Sony studio |
-| [Anduril](https://github.com/Clippableio/Anduril) | Anduril studio |
-| [Autoclipper](https://github.com/Clippableio/Autoclipper) | Shared clip engine |
+| [Enterprise](https://github.com/Clippableio/Enterprise) | Fanatics, Anduril and Sony client applications |
+| [Autoclipper](https://github.com/Clippableio/Autoclipper) | Shared clip/edit engine and Ascend moment finder |
+| [ClippableTraining](https://github.com/Clippableio/ClippableTraining) | Human review and quality feedback |
 | [Clippableios](https://github.com/Clippableio/Clippableios) | iOS |
 
 Which host does what, and how to replace it: [STACK.md](./STACK.md).
+
+## Branches
+
+`main` is the canonical branch in every repository. Short-lived PR branches are removed after merging. Retired work is preserved under `archive/2026-11-10/...` tags.
