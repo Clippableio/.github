@@ -1,52 +1,18 @@
-# Clippable stack
+# Clippable source map
 
-Every live product lives in the [Clippableio](https://github.com/Clippableio) org. Hosts and secrets are replaceable: swap the capture machine, GPU worker, or Railway service without moving ownership off the org.
-
-Do not put operator names or personal GitHub accounts in descriptions or docs.
-
-## Products
-
-| Repo | What it is | Talks to |
-| --- | --- | --- |
-| [WebFrontend](https://github.com/Clippableio/WebFrontend) | Public site and customer app — [clippable.io](https://clippable.io) | WebBackend |
-| [WebBackend](https://github.com/Clippableio/WebBackend) | API, auth, billing, Clippy, workers for the public app only | WebFrontend, Autoclipper (media jobs) |
-| [Fanatics](https://github.com/Clippableio/Fanatics) | Fanatics daily clips — dashboard, API, capture worker, card-pull selector | Autoclipper (library), own Postgres + clip storage |
-| [Sony](https://github.com/Clippableio/Sony) | Sony Music clip studio (own frontend + backend) | Autoclipper |
-| [Anduril](https://github.com/Clippableio/Anduril) | Anduril clip studio (own frontend + backend) | Autoclipper |
-| [Autoclipper](https://github.com/Clippableio/Autoclipper) | Shared clip/edit engine (score, cut, render) | Imported by Fanatics / Sony / Anduril |
-| [Clippableios](https://github.com/Clippableio/Clippableios) | iOS app | WebBackend |
-
-WebBackend is **not** the API for Fanatics, Sony, or Anduril.
-
-## Fanatics runtime (replaceable pieces)
-
-```
-livestreams
-    → capture host (any machine with ffmpeg/streamlink)
-    → GPU worker (any CUDA box; Autoclipper + Fanatics/streamclip)
-    → Fanatics web on Railway (API, login, Postgres, clip files / object storage)
-    → fanatics.clippable.io
-```
-
-| Piece | Repo / config | Replace by |
-| --- | --- | --- |
-| Site + API | `Fanatics/webapp` on Railway | Redeploy the same service |
-| Card-pull finder | `Fanatics/streamclip` | Same repo |
-| Clip engine | `Autoclipper` (`autoclipper-core`) | Point `AUTOCLIPPER_SRC` at a new checkout |
-| Capture host | `Fanatics/worker` env (`CAPTURE_*`) | New machine; same worker scripts |
-| GPU worker | `Fanatics/worker` (`detect_puller`, CUDA) | New GPU box or cloud GPU |
-| Clip files | Railway volume and/or object storage | New bucket + env vars |
-| Search | `Fanatics/webapp` `/api/search` | Text search over already-cut clips |
-
-The public app (WebFrontend + WebBackend) is a separate stack from Fanatics.
-
-## Archived (not products)
-
-| Repo | Why it exists |
+| Repository | Purpose |
 | --- | --- |
-| `stream-clipper-legacy` | Old unused dump. Live Fanatics is `Fanatics`. |
-| `clippable-archive` | Historical worktrees only. |
+| [WebFrontend](https://github.com/Clippableio/WebFrontend) | clippable.io and the customer app |
+| [WebBackend](https://github.com/Clippableio/WebBackend) | Public-app API, authentication, billing and Clippy |
+| [Enterprise](https://github.com/Clippableio/Enterprise) | Fanatics, Anduril and Sony applications, with independent deployments and data |
+| [Autoclipper](https://github.com/Clippableio/Autoclipper) | Clip/edit engine, API/worker services and Ascend full-video moment finder |
+| [ClippableTraining](https://github.com/Clippableio/ClippableTraining) | Human review and quality feedback |
+| [Clippableios](https://github.com/Clippableio/Clippableios) | iOS app |
 
-## Desktop checkouts
+WebBackend serves the public product. Enterprise clients retain separate runtime configuration, storage, credentials and releases. Consolidating their source does not combine customer data or trigger a global rollout. Autoclipper's existing package/API paths remain stable; the moment finder lives in `tools/moment-finder`.
 
-Match repo names: `WebFrontend`, `WebBackend`, `Fanatics`, `Anduril`, `Sony`, `Autoclipper`, `Clippableios`.
+The old Fanatics, Anduril, Sony and RCA repositories were retired after consolidation. RCA is no longer an active Enterprise application. `clippable-archive` retains historical work only.
+
+## Branch workflow
+
+Use `main` as the canonical branch. Create a short-lived branch for a concrete change, use the repository's normal review and protection rules, then remove the branch after merging. Retired branch tips are preserved as `archive/2026-11-10/<original-branch>` tags. Archived unfinished PR work is recoverable from those tags; it is not implicitly shipped. Branch cleanup never bypasses protections or changes production code.
